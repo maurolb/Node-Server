@@ -1,7 +1,6 @@
 const { request, response } = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
-const { findByIdAndUpdate } = require('../models/user');
 
 const getUsers = async(req = request, res = response) => {
 
