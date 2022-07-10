@@ -1,0 +1,2 @@
+# Nota
+Directorio de imágenes

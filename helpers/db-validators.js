@@ -1,6 +1,9 @@
 const {Role} = require('../models');
 const {User, Category, Product} = require('../models');
 
+/**
+ * Role
+ */
 const isValidRole = async(role = '') => {
     if(!role){
         throw new Error('Role filed cannot be empty');
@@ -11,6 +14,9 @@ const isValidRole = async(role = '') => {
     }
 }
 
+/**
+ * Email
+ */
 const emailExists = async (email = '') => {
     const emailExists = await User.findOne({email})
     if (emailExists) {
@@ -18,6 +24,9 @@ const emailExists = async (email = '') => {
     }
 }
 
+/**
+ * Usuarios
+ */
 const userIdExists = async (id) => {
     const user = await User.findById(id)
     if (!user) {
@@ -25,6 +34,9 @@ const userIdExists = async (id) => {
     }
 }
 
+/**
+ * Categorías
+ */
 const categoryIdExists = async (id) => {
     const category = await Category.findById(id)
     if (!category) {
@@ -32,6 +44,9 @@ const categoryIdExists = async (id) => {
     }
 }
 
+/**
+ * Productos
+ */
 const productIdExists = async (id) => {
     const product = await Product.findById(id)
     if (!product) {
@@ -39,10 +54,21 @@ const productIdExists = async (id) => {
     }
 }
 
+/**
+ * Colecciones permitidas
+ */
+ const allowedCollections = async (collection = '', collections = []) => {
+    const included = collections.includes(collection);
+    if (!included) {
+        throw new Error(`That collection is not allowed, allowed collections: ${collections}`);
+    }
+}
+
 module.exports = {
-    isValidRole,
-    emailExists,
-    userIdExists,
+    allowedCollections,
     categoryIdExists,
+    emailExists,
+    isValidRole,
     productIdExists,
+    userIdExists,
 }

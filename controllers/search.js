@@ -90,15 +90,10 @@ const search = (req, res = response) => {
         break;
 
         default:
-            res.status(500).json({
-                msg: 'se le olvido esta busqueda'
+            return res.status(500).json({
+                msg: 'Se me olvidó validar esto'
             })
     }
-
-    // res.json({
-    //     collection,
-    //     term,
-    // })
 }
 
 module.exports = {
