@@ -30,11 +30,11 @@ const postUsers = async (req, res = response) => {
         role
     });
 
-    // encriptar contraseña
+    // Encriptar contraseña
     const salt = bcrypt.genSaltSync();
     user.password = bcrypt.hashSync(password, salt)
 
-    // guardar en db
+    // Guardar en db
     await user.save();
     
     res.json({
@@ -47,9 +47,9 @@ const putUsers = async(req, res = response) => {
     const {id} = req.params
     const { _id, password, google, email, ...rest} = req.body;
 
-    // validar contra la base de datos
+    // Validar contra la base de datos
     if(password){
-        // encriptar contraseña
+        // Encriptar contraseña
         const salt = bcrypt.genSaltSync();
         rest.password = bcrypt.hashSync(password, salt)
     }

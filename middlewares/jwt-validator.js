@@ -15,7 +15,7 @@ const jwtValidator = async(req, res = response, next) => {
     try {
         const {uid} = jwt.verify(token, process.env.SECRETKEY);
 
-        // leer el usuario que corresponde al uid
+        // Leer el usuario que corresponde al uid
         const user = await User.findById(uid)
 
         if(!user){
@@ -24,7 +24,7 @@ const jwtValidator = async(req, res = response, next) => {
             });
         }
 
-        // verificar que el usuario tenga el state true
+        // Verificar que el usuario tenga el state true
         if(!user.state){
             return res.status(401).json({
                 msg: 'Invalid token - user with state: false'

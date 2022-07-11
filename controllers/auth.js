@@ -1,4 +1,4 @@
-const { response, json } = require('express');
+const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const {User} = require('../models');
 const { jwtGenerator } = require('../helpers/jwt-generator');
@@ -10,7 +10,7 @@ const login = async(req, res = response) => {
 
     try {
 
-        // verificar si existe el usuario
+        // Verificar si existe el usuario
         const user = await User.findOne({email})
         if(!user){
             return res.status(400).json({
@@ -18,14 +18,14 @@ const login = async(req, res = response) => {
             })
         }
 
-        // si el usuario está activo
+        // Si el usuario está activo
         if(!user.state) {
             return res.status(400).json({
                 msg: 'Wrong User / Password - state: false'
             })
         }
 
-        // verificar la contraseña
+        // Verificar la contraseña
         const validPassword = bcrypt.compareSync(password, user.password);
         if(!validPassword){
             return res.status(400).json({
@@ -33,7 +33,7 @@ const login = async(req, res = response) => {
             })
         }
 
-        // generar el JWT
+        // Generar el JWT
         const token = await jwtGenerator(user.id)
 
         res.json({
@@ -59,7 +59,7 @@ const googleSignIn = async (req, res = response) => {
         let user = await User.findOne({email});
 
         if(!user){
-            // crear usuario
+            // Crear usuario
             const data = {
                 name,
                 email,
@@ -73,14 +73,14 @@ const googleSignIn = async (req, res = response) => {
             await user.save();
         }
 
-        // verificar el estado del usuario
+        // Verificar el estado del usuario
         if(!user.state){
             return res.status(401).json({
                 msg: 'Contact with the backend admin, blocked user'
             })
         }
 
-        // generar token
+        // Generar token
         const token = await jwtGenerator(user.id)
     
         res.json({

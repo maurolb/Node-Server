@@ -1,6 +1,5 @@
 const { response } = require("express")
 
-
 const isAdminRole = (req, res = response, next) => {
 
     if(!req.user){
@@ -39,7 +38,6 @@ const hasRole = (...roles) => {
 
         next();
     }
-
 }
 
 module.exports = {

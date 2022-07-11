@@ -18,7 +18,6 @@ const jwtGenerator = (uid = '') => {
         });
 
     });
-
 }
 
 module.exports = {
