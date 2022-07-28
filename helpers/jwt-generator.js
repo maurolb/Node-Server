@@ -20,6 +20,8 @@ const jwtGenerator = (uid = '') => {
     });
 }
 
+
+
 module.exports = {
     jwtGenerator,
 }
